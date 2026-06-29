@@ -1,10 +1,12 @@
 # Vehicle Detection with YOLOv8
 
-Computer-vision portfolio project for detecting vehicle classes in road imagery using YOLO-format annotations and Ultralytics YOLOv8.
+Object-detection workflow for classifying and localising vehicles in road imagery using YOLO-format annotations and Ultralytics YOLOv8.
 
-## Overview
+## Problem
 
-The project trains an object detector for five classes:
+Vehicle detection needs both classification and localisation: the model must identify what type of vehicle appears and where it appears in the image. This project trains a detector across five operationally useful classes.
+
+## Classes
 
 - Ambulance
 - Bus
@@ -12,19 +14,19 @@ The project trains an object detector for five classes:
 - Motorcycle
 - Truck
 
-It includes notebook code for visualising YOLO bounding boxes, training a YOLOv8 nano model, validating detection metrics, and running sample predictions.
-
 ## Methods
 
 - YOLO label parsing and bounding-box conversion.
 - Image and annotation visualisation with OpenCV and matplotlib.
-- Ultralytics YOLOv8 training.
+- YOLOv8 model configuration and training.
 - Validation with precision, recall, mAP50, and mAP50-95.
-- Example inference on held-out test images.
+- Example inference on held-out test imagery.
 
-## Results Snapshot
+## Results
 
-The assessment notebook reports validation performance around:
+Validation metrics from the training run:
+
+![YOLOv8 validation metrics](docs/assets/validation_metrics.svg)
 
 | Metric | Value |
 | --- | ---: |
@@ -33,7 +35,13 @@ The assessment notebook reports validation performance around:
 | mAP50 | 0.497 |
 | mAP50-95 | 0.343 |
 
-The project is useful as a compact demonstration of object-detection workflow literacy rather than a production-grade traffic model.
+The run establishes a full object-detection pipeline: inspect labels, train, validate, and predict. The class-level outputs are especially useful for deciding where more data or targeted augmentation would improve the detector.
+
+## Annotation And Inference Checks
+
+![Detector workflow](docs/assets/detector_workflow.svg)
+
+![Sample prediction image](docs/assets/sample_prediction.png)
 
 ## Repository Structure
 
@@ -45,14 +53,14 @@ The project is useful as a compact demonstration of object-detection workflow li
 │   ├── data.yaml
 │   └── README.md
 ├── docs/
-│   └── portfolio_notes.md
+│   └── technical_brief.md
 ├── requirements.txt
 └── README.md
 ```
 
-## Data
+## Data Contract
 
-The full image dataset is not included in this portfolio copy. Place YOLO-format data under:
+Place YOLO-format data under:
 
 ```text
 data/Cars Detection/
@@ -64,9 +72,9 @@ data/Cars Detection/
 └── test/labels
 ```
 
-Then update `data/data.yaml` if paths differ.
+The dataset configuration lives at `data/data.yaml`.
 
-## How to Run
+## Run
 
 ```bash
 python -m venv .venv
@@ -75,10 +83,12 @@ pip install -r requirements.txt
 jupyter lab
 ```
 
-Open `notebooks/vehicle_detection_yolov8.ipynb`.
+Open:
 
-## Limitations
+```text
+notebooks/vehicle_detection_yolov8.ipynb
+```
 
-- The dataset license/source should be documented before publishing data.
-- The notebook is Colab-oriented and should be converted into scripts for repeatable local training.
-- A future version should include a small public sample image plus an exported prediction visual.
+## Engineering Direction
+
+The notebook captures the experimental workflow. The deployment path is a scriptable training command, versioned model weights, exported validation plots, and a small inference wrapper for batch prediction.

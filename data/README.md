@@ -1,8 +1,6 @@
-# Data
+# Data Contract
 
-The full YOLO image dataset is excluded from this public portfolio copy.
-
-Expected layout:
+Expected YOLO dataset layout:
 
 ```text
 data/Cars Detection/train/images
@@ -13,4 +11,10 @@ data/Cars Detection/test/images
 data/Cars Detection/test/labels
 ```
 
-Keep `data/data.yaml` aligned with the local dataset path.
+Configuration:
+
+```text
+data/data.yaml
+```
+
+The repository stores code, configuration, and experiment documentation. Image datasets and trained weights are mounted locally or tracked through an external artifact store.
