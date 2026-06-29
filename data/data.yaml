@@ -1,0 +1,7 @@
+path: ./Cars Detection
+train: train/images
+val: valid/images
+test: test/images
+
+nc: 5
+names: ['Ambulance', 'Bus', 'Car', 'Motorcycle', 'Truck']
